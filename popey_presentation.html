@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POPEY - Le coffee shop qui booste les talents</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #334155;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .presentation-container { 
+            width: 100vw; 
+            height: 100vh; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Correction pour toutes les slides */
+        .slide {
+            width: 100%; 
+            height: 100vh; 
+            display: none; /* Caché par défaut */
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            padding-bottom: 120px; 
+            box-sizing: border-box;
+        }
+        
+        .slide.active { 
+            display: flex !important; /* Force l'affichage */
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            z-index: 10;
+        }
+        
+        /* Spécifique pour chaque slide */
+        .slide-1 { z-index: 1; }
+        .slide-2 { z-index: 1; }
+        .slide-3 { z-index: 1; }
+        .slide-4 { z-index: 1; }
+        .slide-5 { z-index: 1; }
+        .slide-6 { z-index: 1; }
+        
+        .slide-1.active { z-index: 10; }
+        .slide-2.active { z-index: 10; }
+        .slide-3.active { z-index: 10; }
+        .slide-4.active { z-index: 10; }
+        .slide-5.active { z-index: 10; }
+        .slide-6.active { z-index: 10; }
+        
+        .floating-popey {
+            position: fixed; top: 20px; right: 20px; width: 60px; height: 60px;
+            background: url('images/Popey!.png') no-repeat center; background-size: contain;
+            z-index: 50; opacity: 0.8; transition: opacity 0.3s ease;
+        }
+        
+        .floating-popey:hover { opacity: 1; }
+        
+        /* Slide 1 */
+        .slide-1 {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white; text-align: center; position: relative; padding-bottom: 80px;
+        }
+        
+        .slide-1::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative; z-index: 2; display: flex; flex-direction: column;
+            align-items: center; gap: 2rem; max-width: 800px; padding: 0 2rem; margin-bottom: 2rem;
+        }
+        
+        .popey-mascot {
+            width: 3000px; height: 300px;
+            background: url('images/Popey!.png') no-repeat center; background-size: contain; opacity: 0.9;
+        }
+        
+        .logo {
+            font-size: 4rem; font-weight: 700; margin-bottom: 1rem;
+            color: #f1f5f9; letter-spacing: -0.02em;
+        }
+        
+        .tagline {
+            font-size: 1.5rem; font-weight: 400; margin-bottom: 2rem; color: #cbd5e1;
+            background: rgba(255,255,255,0.05); padding: 1rem 2rem; border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem; color: #94a3b8; font-weight: 300;
+            background: rgba(255,255,255,0.05); padding: 0.8rem 1.5rem;
+            border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .coffee-latte {
+            position: absolute; bottom: 40px; right: 40px; width: 80px; height: 80px;
+            background: url('images/mur.webp') no-repeat center; background-size: contain; opacity: 0.6;
+        }
+        
+        /* Slide 2 - Nouveau design Problème/Solution */
+        .slide-2 {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+            color: white !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: none !important;
+            z-index: 1 !important;
+            overflow: hidden !important;
+            padding: 2rem !important;
+            padding-bottom: 120px !important;
+            box-sizing: border-box !important;
+        }
+        
+        .slide-2.active {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 100 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .problem-solution-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            width: 100%;
+            height: calc(100vh - 200px);
+            overflow-y: auto;
+            position: relative;
+            z-index: 101;
+        }
+        
+        .problem-section {
+            background: rgba(220, 38, 38, 0.1);
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .solution-section {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .problem-title {
+            color: #fca5a5;
+        }
+        
+        .solution-title {
+            color: #86efac;
+        }
+        
+        .problem-content,
+        .solution-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: 100%;
+        }
+        
+        .situation-card,
+        .challenges-card,
+        .opportunity-card,
+        .solution-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-around;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fef2f2;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #fed7d7;
+            line-height: 1.3;
+        }
+        
+        .stat-sublabel {
+            font-size: 0.8rem;
+            color: #fca5a5;
+            font-style: italic;
+        }
+        
+        .challenges-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .challenges-list li {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+            color: #fed7d7;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .challenges-list li::before {
+            content: '❌';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .opportunity-text,
+        .solution-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .growth-stat {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .growth-stat .stat-number {
+            color: #86efac;
+            font-size: 2rem;
+        }
+        
+        .growth-stat .stat-label {
+            color: #bbf7d0;
+        }
+        
+        /* Responsive pour la slide 2 */
+        @media (max-width: 1024px) {
+            .problem-solution-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                height: calc(100vh - 160px);
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-2 {
+                padding: 1rem !important;
+            }
+            
+            .problem-section,
+            .solution-section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .problem-solution-container {
+                height: calc(100vh - 160px);
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .slide-1, .slide-3, .slide-4, .slide-5, .slide-6 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: none;
+        }
+        
+        .slide-1.active, .slide-3.active, .slide-4.active, .slide-5.active, .slide-6.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        /* Slide 3 - Le Concept - Nouveau design */
+        .slide-3 {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+            color: #ffffff !important;
+            padding: 2rem !important;
+            padding-bottom: 120px !important;
+        }
+        
+        .slide-3 * {
+            color: inherit !important;
+        }
+        
+        .concept-container {
+            max-width: 1400px;
+            width: 100%;
+            height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            overflow-y: auto;
+        }
+        
+        .concept-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .concept-main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .concept-subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        .concept-main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+        }
+        
+        .concept-visual-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .video-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: #1e293b;
+        }
+        
+        .concept-video {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-button {
+            font-size: 3rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .concept-description {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .concept-description h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+        
+        .concept-description p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        .concept-features-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card.premium {
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .feature-card.community {
+            border-left: 4px solid #10b981;
+        }
+        
+        .feature-card.innovation {
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 0.8rem;
+        }
+        
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .concept-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.3;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .concept-main-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .concept-main-title {
+                font-size: 2.5rem;
+            }
+            
+            .concept-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-3 {
+                padding: 1rem !important;
+            }
+            
+            .concept-container {
+                gap: 1.5rem;
+                height: calc(100vh - 160px);
+            }
+            
+            .concept-main-title {
+                font-size: 2rem;
+            }
+            
+            .concept-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .concept-video {
+                height: 200px;
+            }
+            
+            .concept-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Slide 4 - Nos 5 Espaces Dédiés - Design amélioré */
+        .slide-4 {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            color: #1e293b !important;
+            padding: 2rem !important;
+            padding-bottom: 120px !important;
+        }
+        
+        .spaces-container {
+            max-width: 1400px;
+            width: 100%;
+            height: calc(100vh - 200px);
+            overflow-y: auto;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .spaces-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .spaces-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+        
+        .spaces-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .space-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .space-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .space-card.premium {
+            border-color: #fbbf24;
+        }
+        
+        .space-card.coworking {
+            border-color: #10b981;
+        }
+        
+        .space-card.bakery {
+            border-color: #f59e0b;
+        }
+        
+        .space-card.digital.featured {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+        
+        .space-card.kids {
+            border-color: #ec4899;
+        }
+        
+        .space-card-visual {
+            position: relative;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+        
+        .space-card-icon {
+            font-size: 3rem;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .space-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+        }
+        
+        .coffee-image {
+            background: url('images/mur.webp') no-repeat center;
+            background-size: cover;
+        }
+        
+        .coworking-image {
+            background: url('images/popey_lieu.png') no-repeat center;
+            background-size: cover;
+        }
+        
+        .bakery-image {
+            background: url('images/lieu2.png') no-repeat center;
+            background-size: cover;
+        }
+        
+        .digital-wall-image {
+            background: url('images/mur.png') no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .digital-wall-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3));
+        }
+        
+        .kids-corner-image {
+            background: url('images/creche.jpg') no-repeat center;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .space-card-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .space-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        .space-card p {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        
+        .space-features {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .space-features li {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .space-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        /* Mise en valeur du mur digital */
+        .space-card.digital.featured {
+            grid-column: span 2;
+        }
+        
+        .space-card.digital.featured .space-card-visual {
+            height: 250px;
+        }
+        
+        .space-card.digital.featured h3 {
+            color: #1e40af;
+            font-size: 1.6rem;
+        }
+        
+        .space-card.digital.featured p {
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .spaces-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .space-card.digital.featured {
+                grid-column: span 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-4 {
+                padding: 1rem !important;
+            }
+            
+            .spaces-container {
+                height: calc(100vh - 160px);
+            }
+            
+            .spaces-title {
+                font-size: 2.2rem;
+            }
+            
+            .spaces-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .spaces-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .space-card-visual {
+                height: 150px;
+            }
+            
+            .space-card-content {
+                padding: 1.5rem;
+            }
+        }
+        
+        .slide-5 { background: #1e293b; padding: 4rem 2rem; color: white; }
+        
+        .digital-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            max-width: 1200px; width: 100%; max-height: calc(100vh - 160px);
+            overflow-y: auto; position: relative; z-index: 20;
+        }
+        
+        .digital-text {
+            background: rgba(255,255,255,0.05); padding: 3rem; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .digital-text h2 {
+            font-size: 2.5rem; margin-bottom: 2rem; font-weight: 600; color: #f1f5f9;
+        }
+        
+        .digital-text ul { list-style: none; font-size: 1.1rem; line-height: 2; }
+        
+        .digital-text li {
+            margin-bottom: 1rem; padding-left: 2rem; position: relative; color: #cbd5e1;
+        }
+        
+        .digital-text li::before {
+            content: '•'; position: absolute; left: 0; top: 0; color: #64748b; font-weight: bold;
+        }
+        
+        .digital-visual {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .interactive-wall {
+            width: 280px; height: 350px; background: url('images/mur.png') no-repeat center;
+            background-size: cover; border-radius: 8px; position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden;
+        }
+        
+        .wall-overlay {
+            position: absolute; bottom: 15px; left: 15px; right: 15px;
+            background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 6px;
+        }
+        
+        .entrepreneur-card {
+            color: #334155; font-weight: 500; margin-bottom: 0.8rem; font-size: 0.9rem;
+        }
+        
+        .support-button {
+            background: #1e40af; color: white; padding: 0.6rem 1.2rem; border-radius: 6px;
+            border: none; font-weight: 500; cursor: pointer; transition: background-color 0.2s;
+            font-size: 0.85rem;
+        }
+        
+        .support-button:hover { background: #1d4ed8; }
+        
+        .wall-description {
+            margin-top: 1.5rem; text-align: center; color: #cbd5e1; font-size: 0.95rem;
+        }
+        
+        .slide-6 { background: white; padding: 4rem 2rem; text-align: center; }
+        
+        .contact-container {
+            max-width: 1000px; width: 100%; max-height: calc(100vh - 160px);
+            overflow-y: auto; position: relative; z-index: 20;
+        }
+        
+        .contact-title {
+            font-size: 2.5rem; color: #1e293b; margin-bottom: 1rem; font-weight: 600;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;
+            font-weight: 400; font-style: italic;
+        }
+        
+        .contact-info {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; margin-top: 3rem;
+        }
+        
+        .contact-card {
+            background: #f8fafc; padding: 2.5rem; border-radius: 12px;
+            border: 1px solid #e2e8f0; transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-card h3 {
+            color: #1e293b; margin-bottom: 1rem; font-size: 1.2rem; font-weight: 600;
+        }
+        
+        .contact-card p { color: #64748b; font-size: 1rem; line-height: 1.6; }
+        
+        /* Navigation Buttons - Correction complète */
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000; /* Z-index très élevé */
+            pointer-events: auto; /* Force les événements */
+        }
+        
+        .nav-btn {
+            background: rgba(30, 41, 59, 0.95); /* Plus opaque */
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600; /* Plus gras */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Ombre plus forte */
+            position: relative;
+            z-index: 1001; /* Z-index encore plus élevé */
+            pointer-events: auto; /* Force les clics */
+            user-select: none; /* Évite la sélection */
+        }
+        
+        .nav-btn:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            scale: 1.05; /* Légère augmentation */
+        }
+        
+        .nav-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            scale: 0.98;
+        }
+        
+        .nav-btn:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+        
+        .nav-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none;
+        }
+        
+        /* Slide Indicator - Z-index corrigé */
+        .slide-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            pointer-events: none; /* N'interfère pas avec les clics */
+        }
+        
+        /* Correction pour la slide 2 spécifiquement */
+        .slide-2 {
+            position: relative;
+            z-index: 1; /* Z-index bas pour la slide */
+        }
+        
+        .problem-container {
+            position: relative;
+            z-index: 2; /* Contenu au-dessus de la slide */
+        }
+        
+        .problem-card {
+            position: relative;
+            z-index: 3; /* Cartes au-dessus du contenu */
+        }
+        
+        /* Responsive pour les boutons */
+        @media (max-width: 768px) {
+            .nav-container {
+                bottom: 20px;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .slide-indicator {
+                bottom: 20px;
+                right: 20px;
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container {
+                bottom: 15px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .slide-indicator {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .problem-main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .problem-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .problem-main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .problem-title {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .problem-card {
+                padding: 1rem;
+            }
+            
+            .conclusion-compact {
+                padding: 0.8rem;
+                margin-top: 0.8rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .problem-container {
+                height: calc(100vh - 160px);
+            }
+            
+            .problem-title {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .problem-card {
+                padding: 1rem;
+            }
+            
+            .stat-number-compact {
+                font-size: 1.5rem;
+            }
+        }
+        
+
+        
+
+        
+        .slide-5 { background: #1e293b; padding: 4rem 2rem; color: white; }
+        
+        .digital-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            max-width: 1200px; width: 100%; max-height: calc(100vh - 160px);
+            overflow-y: auto; position: relative; z-index: 20;
+        }
+        
+        .digital-text {
+            background: rgba(255,255,255,0.05); padding: 3rem; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .digital-text h2 {
+            font-size: 2.5rem; margin-bottom: 2rem; font-weight: 600; color: #f1f5f9;
+        }
+        
+        .digital-text ul { list-style: none; font-size: 1.1rem; line-height: 2; }
+        
+        .digital-text li {
+            margin-bottom: 1rem; padding-left: 2rem; position: relative; color: #cbd5e1;
+        }
+        
+        .digital-text li::before {
+            content: '•'; position: absolute; left: 0; top: 0; color: #64748b; font-weight: bold;
+        }
+        
+        .digital-visual {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .interactive-wall {
+            width: 280px; height: 350px; background: url('images/mur.png') no-repeat center;
+            background-size: cover; border-radius: 8px; position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden;
+        }
+        
+        .wall-overlay {
+            position: absolute; bottom: 15px; left: 15px; right: 15px;
+            background: rgba(255,255,255,0.95); padding: 1rem; border-radius: 6px;
+        }
+        
+        .entrepreneur-card {
+            color: #334155; font-weight: 500; margin-bottom: 0.8rem; font-size: 0.9rem;
+        }
+        
+        .support-button {
+            background: #1e40af; color: white; padding: 0.6rem 1.2rem; border-radius: 6px;
+            border: none; font-weight: 500; cursor: pointer; transition: background-color 0.2s;
+            font-size: 0.85rem;
+        }
+        
+        .support-button:hover { background: #1d4ed8; }
+        
+        .wall-description {
+            margin-top: 1.5rem; text-align: center; color: #cbd5e1; font-size: 0.95rem;
+        }
+        
+        .slide-6 { background: white; padding: 4rem 2rem; text-align: center; }
+        
+        .contact-container {
+            max-width: 1000px; width: 100%; max-height: calc(100vh - 160px);
+            overflow-y: auto; position: relative; z-index: 20;
+        }
+        
+        .contact-title {
+            font-size: 2.5rem; color: #1e293b; margin-bottom: 1rem; font-weight: 600;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;
+            font-weight: 400; font-style: italic;
+        }
+        
+        .contact-info {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; margin-top: 3rem;
+        }
+        
+        .contact-card {
+            background: #f8fafc; padding: 2.5rem; border-radius: 12px;
+            border: 1px solid #e2e8f0; transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-card h3 {
+            color: #1e293b; margin-bottom: 1rem; font-size: 1.2rem; font-weight: 600;
+        }
+        
+        .contact-card p { color: #64748b; font-size: 1rem; line-height: 1.6; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide.active * { animation: fadeInUp 0.6s ease forwards; }
+        
+        @media (max-width: 768px) {
+            .slide { padding-bottom: 100px; }
+            .slide-2, .slide-3, .slide-4, .slide-5, .slide-6 { padding-bottom: 120px; }
+            .problem-container, .concept-main-content, .digital-container {
+                grid-template-columns: 1fr; gap: 2rem; max-height: calc(100vh - 140px);
+            }
+            .logo { font-size: 3rem; }
+            .tagline { font-size: 1.2rem; }
+            .spaces-grid { grid-template-columns: 1fr; }
+            .nav-container { bottom: 1rem; padding: 0.3rem; }
+            .nav-btn { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+            .floating-popey { width: 50px; height: 50px; }
+            .interactive-wall { width: 240px; height: 300px; }
+            .concept-description, .digital-text, .problem-section { padding: 2rem; }
+            .concept-main-title, .digital-text h2, .problem-title { font-size: 2rem; }
+            .problem-title, .conclusion-box { grid-column: 1; }
+            .concept-video { height: 200px; }
+            .concept-stats { flex-direction: column; gap: 1rem; }
+            .concept-stats .stat-number { font-size: 1.5rem; }
+        }
+        
+        @media (max-height: 700px) {
+            .slide { padding-bottom: 80px; }
+            .slide-2, .slide-3, .slide-4, .slide-5, .slide-6 { padding-bottom: 100px; }
+            .problem-container, .concept-grid, .spaces-container, .digital-container, .contact-container {
+                max-height: calc(100vh - 120px);
+            }
+            .nav-container { bottom: 1rem; }
+        }
+
+                /* Styles pour la section situation actuelle */
+        .location-stats {
+            margin: 1.5rem 0;
+        }
+        
+        .area-info {
+            font-size: 1rem;
+            color: #fed7d7;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .key-numbers {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            min-width: 140px;
+        }
+        
+        .big-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fef2f2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #fecaca;
+            line-height: 1.3;
+        }
+        
+        .stat-label small {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .projection-box {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border: 2px solid rgba(254, 202, 202, 0.3);
+            text-align: center;
+        }
+        
+        .projection-box h4 {
+            font-size: 1.1rem;
+            color: #fef2f2;
+            margin-bottom: 1rem;
+        }
+        
+        .projection-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fef2f2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .projection-label {
+            font-size: 0.95rem;
+            color: #fecaca;
+            line-height: 1.4;
+        }
+        
+        .problems-list {
+            margin: 2rem 0;
+        }
+        
+        .problems-list h4 {
+            font-size: 1.1rem;
+            color: #fecaca;
+            margin-bottom: 1rem;
+        }
+        
+        .problems-list ul {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #fca5a5;
+        }
+        
+        .market-opportunity {
+            margin-top: 2rem;
+        }
+        
+        .market-opportunity p {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #fca5a5;
+        }
+        
+        /* Responsive pour cette section */
+        @media (max-width: 768px) {
+            .key-numbers {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-box {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .big-number {
+                font-size: 1.8rem;
+            }
+            
+            .projection-number {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="floating-popey"></div>
+    
+    <div class="presentation-container">
+        <div class="slide slide-1 active">
+            <div class="hero-content">
+                <div class="popey-mascot"></div>
+                <h1 style="margin-top: -50px;"; class="logo">POPEY</h1>
+                <p class="tagline">Le coffee shop qui booste les talents locaux</p>
+                <div style="margin-top: -50px;"; class="subtitle">Un concept innovant de 400m² au cœur de votre centre commercial</div>
+            </div>
+        
+        </div>
+        
+        <div class="slide slide-2">
+            <div class="problem-solution-container">
+                <!-- Section Problème -->
+                <div class="problem-section">
+                    <h2 class="section-title problem-title">🚨 Problème</h2>
+                    
+                    <div class="problem-content">
+                        <!-- Situation Grand-Dax -->
+                        <div class="situation-card">
+                            <h3 class="card-title">📍 Situation Grand-Dax</h3>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <div class="stat-number">6 200</div>
+                                    <div class="stat-label">indépendants purs estimés<br><span class="stat-sublabel">(~65% auto/micro-entrepreneurs)</span></div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">≃ 8 000</div>
+                                    <div class="stat-label">projection 2030</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Défis des indépendants -->
+                        <div class="challenges-card">
+                            <h3 class="card-title">🔍 Défis des indépendants</h3>
+                            <ul class="challenges-list">
+                                <li>Isolement professionnel</li>
+                                <li>Manque de clients</li>
+                                <li>Difficulté à se faire connaître</li>
+                                <li>Entrepreneurs sans réseau</li>
+                                <li>Espaces de coworking trop passifs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section Solution -->
+                <div class="solution-section">
+                    <h2 class="section-title solution-title">💡 Solution</h2>
+                    
+                    <div class="solution-content">
+                        <!-- Opportunité du marché -->
+                        <div class="opportunity-card">
+                            <h3 class="card-title">💡 Opportunité du marché</h3>
+                            <p class="opportunity-text">Des clients cherchent des prestataires locaux et veulent soutenir des projets inspirants.</p>
+                            <div class="growth-stat">
+                                <div class="stat-number">20%</div>
+                                <div class="stat-label">des indépendants en croissance d'ici 2030</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Solution nécessaire -->
+                        <div class="solution-card">
+                            <h3 class="card-title">🚀 Solution nécessaire</h3>
+                            <p class="solution-text">Les indépendants ont besoin d'un écosystème local qui les aide à se rendre visibles, trouver des clients, financer leurs projets et créer du lien humain.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide slide-3">
+            <div class="concept-container">
+                <!-- En-tête avec titre -->
+                <div class="concept-header">
+                    <h2 class="concept-main-title">☕ Le Concept POPEY</h2>
+                    <p class="concept-subtitle">Un écosystème innovant de 400m² qui révolutionne l'entrepreneuriat local</p>
+                </div>
+                
+                <!-- Contenu principal en deux colonnes -->
+                <div class="concept-main-content">
+                    <!-- Colonne gauche : Vidéo et description -->
+                    <div class="concept-visual-section">
+                        <div class="video-container">
+                            <video class="concept-video" autoplay muted loop playsinline>
+                                <source src="images/Popey2.mp4" type="video/mp4">
+                                Votre navigateur ne supporte pas la vidéo.
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-button" onclick="toggleVideo()">▶️</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept-description">
+                            <h3>🎯 Notre Mission</h3>
+                            <p>Créer un lieu unique où <span class="highlight">entrepreneurs</span>, <span class="highlight">clients</span> et <span class="highlight">communauté</span> se rencontrent autour d'un café d'exception.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne droite : Caractéristiques -->
+                    <div class="concept-features-section">
+                        <div class="feature-card premium">
+                            <div class="feature-icon">🏢</div>
+                            <h3>400m² d'Innovation</h3>
+                            <p>Un espace pensé pour maximiser les interactions et créer de la valeur ajoutée</p>
+                            <ul class="feature-list">
+                                <li>Design moderne et chaleureux</li>
+                                <li>Zones modulables selon les besoins</li>
+                                <li>Technologie intégrée</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card community">
+                            <div class="feature-icon">🤝</div>
+                            <h3>Écosystème Connecté</h3>
+                            <p>Plus qu'un coffee shop, un véritable hub entrepreneurial</p>
+                            <ul class="feature-list">
+                                <li>Networking naturel et spontané</li>
+                                <li>Support aux projets locaux</li>
+                                <li>Événements et formations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card innovation">
+                            <div class="feature-icon">💡</div>
+                            <h3>Impact Social</h3>
+                            <p>Chaque consommation soutient l'entrepreneuriat local</p>
+                            <ul class="feature-list">
+                                <li>5% reversés aux entrepreneurs</li>
+                                <li>Visibilité pour les projets</li>
+                                <li>Création d'emplois locaux</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Statistiques en bas -->
+                <div class="concept-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">400m²</div>
+                        <div class="stat-label">d'espace optimisé</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">espaces dédiés</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">local & solidaire</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">accessibilité coworking</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide slide-4">
+            <div class="spaces-container">
+                <h2 class="spaces-title">Nos 5 Espaces Dédiés</h2>
+                <p class="spaces-subtitle">Un écosystème complet pour entrepreneurs et clients</p>
+                
+                <div class="spaces-grid">
+                    <!-- Coffee Shop Premium -->
+                    <div class="space-card premium">
+                        <div class="space-card-visual">
+                            <div class="space-card-icon">☕</div>
+                            <div class="space-image coffee-image"></div>
+                        </div>
+                        <div class="space-card-content">
+                            <h3>Coffee Shop Premium</h3>
+                            <p>Sélection de cafés d'exception, thés rares et boissons artisanales dans un cadre raffiné</p>
+                            <ul class="space-features">
+                                <li>Cafés de spécialité</li>
+                                <li>Ambiance chaleureuse</li>
+                                <li>Service premium</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Espace Coworking -->
+                    <div class="space-card coworking">
+                        <div class="space-card-visual">
+                            <div class="space-card-icon">💻</div>
+                            <div class="space-image coworking-image"></div>
+                        </div>
+                        <div class="space-card-content">
+                            <h3>Espace Coworking</h3>
+                            <p>Zones de travail modulables avec wifi haut débit, verdure et matériaux naturels</p>
+                            <ul class="space-features">
+                                <li>Wifi ultra-rapide</li>
+                                <li>Espaces modulables</li>
+                                <li>Environnement inspirant</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Bar à Croissants -->
+                    <div class="space-card bakery">
+                        <div class="space-card-visual">
+                            <div class="space-card-icon">🥐</div>
+                            <div class="space-image bakery-image"></div>
+                        </div>
+                        <div class="space-card-content">
+                            <h3>Bar à Croissants Fourrés</h3>
+                            <p>Croissants artisanaux aux garnitures gourmandes, sucrées et salées</p>
+                            <ul class="space-features">
+                                <li>Pâtisserie artisanale</li>
+                                <li>Recettes originales</li>
+                                <li>Produits frais</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Mur Digital Interactif -->
+                    <div class="space-card digital featured">
+                        <div class="space-card-visual">
+                            <div class="space-card-icon">📺</div>
+                            <div class="space-image digital-wall-image"></div>
+                        </div>
+                        <div class="space-card-content">
+                            <h3>Mur Digital Interactif</h3>
+                            <p>Découvrez et soutenez les entrepreneurs locaux avec 5% de votre consommation</p>
+                            <ul class="space-features">
+                                <li>Interface tactile</li>
+                                <li>Projets locaux</li>
+                                <li>Impact social mesurable</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Kids Corner -->
+                    <div class="space-card kids">
+                        <div class="space-card-visual">
+                            <div class="space-card-icon">🧸</div>
+                            <div class="kids-corner-image"></div>
+                        </div>
+                        <div class="space-card-content">
+                            <h3>Kids Corner</h3>
+                            <p>Espace enfants sécurisé avec animatrice, visible mais séparé de l'espace principal</p>
+                            <ul class="space-features">
+                                <li>Surveillance professionnelle</li>
+                                <li>Jeux éducatifs</li>
+                                <li>Sécurité maximale</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide slide-5">
+            <div class="digital-container">
+                <div class="digital-text">
+                    <h2>Innovation Digitale</h2>
+                    <ul>
+                        <li>Découvrez les entrepreneurs locaux via le mur digital</li>
+                        <li>Soutenez leurs projets en 1 clic</li>
+                        <li>5% de vos consommations leur sont reversées</li>
+                        <li>Interface tactile intuitive</li>
+                        <li>Histoires inspirantes et témoignages</li>
+                        <li>Impact social mesurable</li>
+                    </ul>
+                </div>
+                <div class="digital-visual">
+                    <div class="interactive-wall">
+                       
+                    </div>
+                    <p class="wall-description">Chaque café devient un geste solidaire</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide slide-6">
+            <div class="contact-container">
+                <h2 class="contact-title">L'Aventure POPEY</h2>
+                <p class="contact-subtitle">"Le coffee shop qui booste les talents"</p>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>📍 Emplacement au dessus d'action : Idéal</h3>
+                        <p>400m² stratégiquement placés pour maximiser la visibilité et l'affluence</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>🤝 Partenariat Gagnant</h3>
+                        <p>De nombreux coworkers et clients frequenteront Popey et par conséquence le centre commercial</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-container">
+        <button class="nav-btn" id="prevBtn">← Précédent</button>
+        <button class="nav-btn" id="nextBtn">Suivant →</button>
+    </div>
+    
+    <div class="slide-indicator">
+        <span id="slideNumber">1</span> / 6
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        console.log(`🔍 DÉTECTION: ${totalSlides} slides trouvées`);
+        
+        function showSlide(n) {
+            console.log(`📍 showSlide(${n}) appelée - currentSlide avant: ${currentSlide}`);
+            
+            // Validation de l'index
+            const targetSlide = Math.max(0, Math.min(n, totalSlides - 1));
+            
+            // Masquer toutes les slides
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                slide.style.cssText = 'display: none !important; opacity: 0 !important; z-index: 1 !important;';
+                console.log(`  Slide ${index + 1} masquée`);
+            });
+            
+            // Mettre à jour currentSlide
+            currentSlide = targetSlide;
+            
+            // Afficher la slide active
+            const activeSlide = slides[currentSlide];
+            if (activeSlide) {
+                let baseStyles = `
+                    display: flex !important;
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100vw !important;
+                    height: 100vh !important;
+                    z-index: 1000 !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    flex-direction: column !important;
+                    justify-content: center !important;
+                    align-items: center !important;
+                `;
+                
+                // Styles spécifiques par slide
+                switch(currentSlide) {
+                    case 0: baseStyles += 'background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important; color: white !important;'; break;
+                    case 1: baseStyles += 'background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important; color: white !important; padding: 1.5rem !important; padding-bottom: 120px !important;'; break;
+                    case 2: baseStyles += 'background: #ffffff !important; color: #334155 !important; padding: 4rem 2rem !important;'; break;
+                    case 3: baseStyles += 'background: #f8fafc !important; color: #334155 !important; padding: 4rem 2rem !important;'; break;
+                    case 4: baseStyles += 'background: #1e293b !important; color: white !important; padding: 4rem 2rem !important;'; break;
+                    case 5: baseStyles += 'background: white !important; color: #334155 !important; padding: 4rem 2rem !important;'; break;
+                }
+                
+                activeSlide.style.cssText = baseStyles;
+                activeSlide.classList.add('active');
+                
+                console.log(`✅ Slide ${currentSlide + 1} affichée`);
+            }
+            
+            // Mettre à jour l'interface
+            document.getElementById('slideNumber').textContent = currentSlide + 1;
+            document.getElementById('prevBtn').classList.toggle('disabled', currentSlide === 0);
+            document.getElementById('nextBtn').classList.toggle('disabled', currentSlide === totalSlides - 1);
+            
+            console.log(`📊 État final: currentSlide=${currentSlide}, slide active=${currentSlide + 1}/${totalSlides}`);
+        }
+        
+        function nextSlide() {
+            console.log(`➡️ nextSlide() - currentSlide=${currentSlide}, max=${totalSlides - 1}`);
+            if (currentSlide < totalSlides - 1) {
+                const nextIndex = currentSlide + 1;
+                console.log(`   Passage à la slide ${nextIndex + 1}`);
+                showSlide(nextIndex);
+            } else {
+                console.log('   ⚠️ Déjà à la dernière slide');
+            }
+        }
+        
+        function previousSlide() {
+            console.log(`⬅️ previousSlide() - currentSlide=${currentSlide}`);
+            if (currentSlide > 0) {
+                const prevIndex = currentSlide - 1;
+                console.log(`   Retour à la slide ${prevIndex + 1}`);
+                showSlide(prevIndex);
+            } else {
+                console.log('   ⚠️ Déjà à la première slide');
+            }
+        }
+        
+        // Gestion du clavier
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+        
+        // Gestion tactile
+        let touchStartX = 0, touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else previousSlide();
+            }
+        });
+        
+        // UN SEUL event listener DOMContentLoaded
+        // Fonction pour contrôler la vidéo
+        function toggleVideo() {
+            const video = document.querySelector('.concept-video');
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log(`🚀 INITIALISATION: ${totalSlides} slides détectées`);
+            
+            // Afficher la première slide
+            showSlide(0);
+            
+            // Event listeners pour les boutons (SANS onclick dans le HTML)
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🔥 CLIC BOUTON SUIVANT');
+                    nextSlide();
+                });
+                console.log('✅ Event listener SUIVANT ajouté');
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🔥 CLIC BOUTON PRÉCÉDENT');
+                    previousSlide();
+                });
+                console.log('✅ Event listener PRÉCÉDENT ajouté');
+            }
+        });
+    </script>
+</body>
+</html>
+       
