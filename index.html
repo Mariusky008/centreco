@@ -59,6 +59,7 @@
         .slide-4 { z-index: 1; }
         .slide-5 { z-index: 1; }
         .slide-6 { z-index: 1; }
+        .slide-7 { z-index: 1; }
         
         .slide-1.active { z-index: 10; }
         .slide-2.active { z-index: 10; }
@@ -66,6 +67,7 @@
         .slide-4.active { z-index: 10; }
         .slide-5.active { z-index: 10; }
         .slide-6.active { z-index: 10; }
+        .slide-7.active { z-index: 10; }
         
         .floating-popey {
             position: fixed; top: 20px; right: 20px; width: 60px; height: 60px;
@@ -354,7 +356,7 @@
             }
         }
         
-        .slide-1, .slide-3, .slide-4, .slide-5, .slide-6 {
+        .slide-1, .slide-3, .slide-4, .slide-5, .slide-6, .slide-7 {
             position: absolute;
             top: 0;
             left: 0;
@@ -363,7 +365,7 @@
             display: none;
         }
         
-        .slide-1.active, .slide-3.active, .slide-4.active, .slide-5.active, .slide-6.active {
+        .slide-1.active, .slide-3.active, .slide-4.active, .slide-5.active, .slide-6.active, .slide-7.active {
             display: flex;
             opacity: 1;
             z-index: 10;
@@ -971,7 +973,182 @@
             margin-top: 1.5rem; text-align: center; color: #cbd5e1; font-size: 0.95rem;
         }
         
-        .slide-6 { background: white; padding: 4rem 2rem; text-align: center; }
+        /* Slide 6 - Pourquoi venir chez POPEY */
+        .slide-6 {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+            color: white !important;
+            padding: 2rem !important;
+            padding-bottom: 120px !important;
+        }
+        
+        .why-come-container {
+            max-width: 1400px;
+            width: 100%;
+            height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .why-come-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .why-come-subtitle {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        .why-come-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            flex: 1;
+        }
+        
+        .clients-section,
+        .coworkers-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+        
+        .clients-section .section-title {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            color: #86efac;
+        }
+        
+        .coworkers-section .section-title {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            color: #93c5fd;
+        }
+        
+        .reasons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .reason-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .reason-number {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #fbbf24;
+            color: #1e293b;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .reason-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .reason-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.8rem;
+        }
+        
+        .reason-card p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+        
+        .reason-card strong {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        
+        /* Couleurs spécifiques par type */
+        .reason-card.premium { border-left: 4px solid #fbbf24; }
+        .reason-card.solidarity { border-left: 4px solid #10b981; }
+        .reason-card.expertise { border-left: 4px solid #3b82f6; }
+        .reason-card.family { border-left: 4px solid #ec4899; }
+        .reason-card.test { border-left: 4px solid #8b5cf6; }
+        .reason-card.network { border-left: 4px solid #06b6d4; }
+        .reason-card.solutions { border-left: 4px solid #f59e0b; }
+        .reason-card.community { border-left: 4px solid #ef4444; }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .why-come-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .why-come-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-6 {
+                padding: 1rem !important;
+            }
+            
+            .why-come-container {
+                height: calc(100vh - 160px);
+                gap: 1rem;
+            }
+            
+            .why-come-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .reason-card {
+                padding: 1rem;
+            }
+        }
+        
+        .slide-7 { background: white !important; color: #1e293b !important; padding: 4rem 2rem !important; text-align: center; }
         
         .contact-container {
             max-width: 1000px; width: 100%; max-height: calc(100vh - 160px);
@@ -1295,7 +1472,7 @@
         
         @media (max-width: 768px) {
             .slide { padding-bottom: 100px; }
-            .slide-2, .slide-3, .slide-4, .slide-5, .slide-6 { padding-bottom: 120px; }
+            .slide-2, .slide-3, .slide-4, .slide-5, .slide-6, .slide-7 { padding-bottom: 120px; }
             .problem-container, .concept-main-content, .digital-container {
                 grid-template-columns: 1fr; gap: 2rem; max-height: calc(100vh - 140px);
             }
@@ -1316,7 +1493,7 @@
         
         @media (max-height: 700px) {
             .slide { padding-bottom: 80px; }
-            .slide-2, .slide-3, .slide-4, .slide-5, .slide-6 { padding-bottom: 100px; }
+            .slide-2, .slide-3, .slide-4, .slide-5, .slide-6, .slide-7 { padding-bottom: 100px; }
             .problem-container, .concept-grid, .spaces-container, .digital-container, .contact-container {
                 max-height: calc(100vh - 120px);
             }
@@ -1730,13 +1907,90 @@
         </div>
         
         <div class="slide slide-6">
+            <div class="why-come-container">
+                <h2 class="why-come-title">🎯 Pourquoi venir chez POPEY ?</h2>
+                <p class="why-come-subtitle">Un écosystème qui répond aux besoins de chacun</p>
+                
+                <div class="why-come-content">
+                    <!-- Section Clients -->
+                    <div class="clients-section">
+                        <h3 class="section-title">👥 Côté Clients</h3>
+                        <div class="reasons-grid">
+                            <div class="reason-card premium">
+                                <div class="reason-number">1</div>
+                                <div class="reason-icon">☕</div>
+                                <h4>Excellence Culinaire</h4>
+                                <p>Le <strong>meilleur café</strong> et les <strong>meilleurs croissants</strong> de la ville – fourrés sur place, confectionnés par le meilleur boulanger de France. On aurait des fans rien que pour ça.</p>
+                            </div>
+                            
+                            <div class="reason-card solidarity">
+                                <div class="reason-number">2</div>
+                                <div class="reason-icon">💝</div>
+                                <h4>Impact Social Direct</h4>
+                                <p><strong>5% de toutes les additions</strong> reversées aux coworkers. Le client choisit via le mur interactif qui soutenir. Coup de foudre ? Il peut devenir mécène ou investisseur : notre <strong>crowdfunding local en direct</strong>.</p>
+                            </div>
+                            
+                            <div class="reason-card expertise">
+                                <div class="reason-number">3</div>
+                                <div class="reason-icon">🧠</div>
+                                <h4>Expertise à Portée</h4>
+                                <p>Un souci, un problème ? Nos coworkers ont la solution <strong>ici même</strong> pendant votre latté ! Cliquez sur le mur interactif, posez votre question, obtenez une réponse ou un devis.</p>
+                            </div>
+                            
+                            <div class="reason-card family">
+                                <div class="reason-number">4</div>
+                                <div class="reason-icon">👶</div>
+                                <h4>Kids Corner Premium</h4>
+                                <p>Idéalement situé à côté d'Action dans un centre très fréquenté. Laissez vos enfants <strong>entre de bonnes mains</strong> pendant que vous travaillez ou profitez.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Coworkers -->
+                    <div class="coworkers-section">
+                        <h3 class="section-title">💼 Côté Coworkers</h3>
+                        <div class="reasons-grid">
+                            <div class="reason-card test">
+                                <div class="reason-number">1</div>
+                                <div class="reason-icon">🧪</div>
+                                <h4>Test Marché Réel</h4>
+                                <p><strong>Tester leurs idées sur place</strong> pour voir la réalité du marché avec de vrais clients.</p>
+                            </div>
+                            
+                            <div class="reason-card network">
+                                <div class="reason-number">2</div>
+                                <div class="reason-icon">🤝</div>
+                                <h4>Réseau Naturel</h4>
+                                <p><strong>Créer du lien et du réseau</strong> sur place dans un environnement détendu et professionnel.</p>
+                            </div>
+                            
+                            <div class="reason-card solutions">
+                                <div class="reason-number">3</div>
+                                <div class="reason-icon">💡</div>
+                                <h4>Solutions Collaboratives</h4>
+                                <p><strong>Trouver des solutions</strong> à leurs problèmes grâce à la communauté présente sur place.</p>
+                            </div>
+                            
+                            <div class="reason-card community">
+                                <div class="reason-number">4</div>
+                                <div class="reason-icon">🎯</div>
+                                <h4>Clients Potentiels</h4>
+                                <p><strong>Accéder à une vraie communauté</strong> de clients potentiels directement sur place.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide slide-7">
             <div class="contact-container">
                 <h2 class="contact-title">L'Aventure POPEY</h2>
-                <p class="contact-subtitle">"Le coffee shop qui booste les talents"</p>
+                <p class="contact-subtitle">"Le coffee shop qui booste les talents locaux"</p>
                 <div class="contact-info">
                     <div class="contact-card">
-                        <h3>📍 Emplacement au dessus d'action : Idéal</h3>
-                        <p>400m² stratégiquement placés pour maximiser la visibilité et l'affluence</p>
+                        <h3>📍 Emplacement Idéal</h3>
+                        <p>400m² stratégiquement placés au dessus du magasin Action pour maximiser la visibilité et l'affluence</p>
                     </div>
                     <div class="contact-card">
                         <h3>🤝 Partenariat Gagnant</h3>
@@ -1754,7 +2008,7 @@
     </div>
     
     <div class="slide-indicator">
-        <span id="slideNumber">1</span> / 6
+        <span id="slideNumber">1</span> / 7
     </div>
     
     <script>
@@ -1801,11 +2055,12 @@
                 // Styles spécifiques par slide
                 switch(currentSlide) {
                     case 0: baseStyles += 'background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important; color: white !important;'; break;
-                    case 1: baseStyles += 'background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important; color: white !important; padding: 1.5rem !important; padding-bottom: 120px !important;'; break;
-                    case 2: baseStyles += 'background: #ffffff !important; color: #334155 !important; padding: 4rem 2rem !important;'; break;
-                    case 3: baseStyles += 'background: #f8fafc !important; color: #334155 !important; padding: 4rem 2rem !important;'; break;
+                    case 1: baseStyles += 'background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important; color: white !important; padding: 2rem !important; padding-bottom: 120px !important;'; break;
+                    case 2: baseStyles += 'background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important; color: #ffffff !important; padding: 2rem !important; padding-bottom: 120px !important;'; break;
+                    case 3: baseStyles += 'background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important; color: #1e293b !important; padding: 2rem !important; padding-bottom: 120px !important;'; break;
                     case 4: baseStyles += 'background: #1e293b !important; color: white !important; padding: 4rem 2rem !important;'; break;
-                    case 5: baseStyles += 'background: white !important; color: #334155 !important; padding: 4rem 2rem !important;'; break;
+                    case 5: baseStyles += 'background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important; color: white !important; padding: 2rem !important; padding-bottom: 120px !important;'; break;
+                    case 6: baseStyles += 'background: white !important; color: #1e293b !important; padding: 4rem 2rem !important;'; break;
                 }
                 
                 activeSlide.style.cssText = baseStyles;
@@ -1916,4 +2171,5 @@
     </script>
 </body>
 </html>
+       
        
