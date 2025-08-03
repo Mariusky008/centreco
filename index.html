@@ -848,7 +848,7 @@
         
         .space-card.digital.featured {
             border-color: #3b82f6;
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            background: white;
         }
         
         .space-card.kids {
@@ -911,20 +911,17 @@
         }
         
         .digital-wall-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3));
+            display: none;
         }
         
         .kids-corner-image {
             background: url('images/creche.jpg') no-repeat center;
             background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             width: 100%;
             height: 100%;
+            opacity: 0.8;
         }
         
         .space-card-content {
@@ -973,11 +970,13 @@
         
         /* Mise en valeur du mur digital */
         .space-card.digital.featured {
-            grid-column: span 2;
+            grid-column: span 1; /* Toujours une seule colonne */
+            border-width: 3px; /* Bordure plus épaisse */
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15); /* Ombre colorée */
         }
         
         .space-card.digital.featured .space-card-visual {
-            height: 250px;
+            height: 200px; /* Même hauteur que les autres cartes */
         }
         
         .space-card.digital.featured h3 {
@@ -993,10 +992,6 @@
         @media (max-width: 1200px) {
             .spaces-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-            
-            .space-card.digital.featured {
-                grid-column: span 1;
             }
         }
         
@@ -2402,6 +2397,4 @@
     </script>
 </body>
 </html>
-       
-       
        
