@@ -1610,11 +1610,12 @@
             }
             
             .tagline {
-                font-size: 1rem !important;
-                padding: 0.8rem 1rem !important;
+                font-size: 1rem !important; /* Plus petit */
+                padding: 0.8rem 1rem !important; /* Moins de padding */
                 margin-bottom: 1.5rem !important;
-                line-height: 1.4 !important;
+                line-height: 1.4 !important; /* Meilleur espacement des lignes */
                 text-align: center !important;
+                /* Option 1: Forcer sur 2 lignes */
                 word-break: break-word !important;
                 hyphens: auto !important;
             }
@@ -1654,6 +1655,7 @@
             .tagline {
                 font-size: 0.9rem !important;
                 padding: 0.6rem 0.8rem !important;
+                /* Option 2: Texte plus court sur très petits écrans */
             }
             
             .subtitle {
@@ -2285,18 +2287,39 @@
             }
         });
         
-        // Gestion tactile
-        let touchStartX = 0, touchEndX = 0;
+        // Gestion tactile améliorée
+        let touchStartX = 0, touchEndX = 0, touchStartY = 0, touchEndY = 0;
+        let isScrolling = false;
         
         document.addEventListener('touchstart', function(e) {
             touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            isScrolling = false;
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+            const touchMoveY = e.changedTouches[0].screenY;
+            const diffY = Math.abs(touchStartY - touchMoveY);
+            
+            // Si l'utilisateur fait défiler verticalement, ne pas changer de slide
+            if (diffY > 10) {
+                isScrolling = true;
+            }
         });
         
         document.addEventListener('touchend', function(e) {
+            if (isScrolling) return; // Ignore si l'utilisateur scrollait
+            
             touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) nextSlide();
+            touchEndY = e.changedTouches[0].screenY;
+            
+            const diffX = touchStartX - touchEndX;
+            const diffY = Math.abs(touchStartY - touchEndY);
+            
+            // Seulement si le mouvement horizontal est plus important que vertical
+            // ET si le mouvement est suffisamment important (100px au lieu de 50px)
+            if (Math.abs(diffX) > 100 && Math.abs(diffX) > diffY * 2) {
+                if (diffX > 0) nextSlide();
                 else previousSlide();
             }
         });
@@ -2379,5 +2402,6 @@
     </script>
 </body>
 </html>
+       
        
        
